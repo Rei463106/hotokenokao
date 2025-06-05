@@ -50,21 +50,25 @@ public class NewBehaviourScript : MonoBehaviour
             if (resultText != null)
             {
                 resultText.text = "‚í‚³‚Ñ";
+                resultText.color = Color.green;
             }
         }
         else if (type == "b")
         {
 
             resultText.text = "‚µ‚á‚¯";
+            resultText.color = Color.red;
         }
         else if (type == "c")
         {
 
             resultText.text = "‚¨‚©‚©";
+            resultText.color = Color.yellow;
         }
         else if (type == "d") {
 
             resultText.text = "ƒcƒiƒ}ƒˆ";
+            resultText.color= Color.white;
         }
 
     }
