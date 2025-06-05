@@ -10,7 +10,7 @@ public class Circle_controll : MonoBehaviour
     //オブジェの名前を上記のものにランダムに書き換える
     //もしもオブジェの名前がaなら画面にaと表示する。
 
-
+    //今更だけど、ゲームオブジェが既にランダムなら配列通りでも良くないか…？？
 
 
     void Start()
