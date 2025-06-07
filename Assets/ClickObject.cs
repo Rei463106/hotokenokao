@@ -1,9 +1,9 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 using UnityEngine.UI;
 
 
-public class NewBehaviourScript : MonoBehaviour
+public class ClickObject : MonoBehaviour
 {
     public Text resultText;
 
@@ -37,7 +37,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("CircleType Ç™å©Ç¬Ç©ÇËÇ‹ÇπÇÒ");
+            Debug.LogWarning("CircleType „ÅåË¶ã„Å§„Åã„Çä„Åæ„Åõ„Çì");
         }
     }
 
@@ -49,26 +49,30 @@ public class NewBehaviourScript : MonoBehaviour
 
             if (resultText != null)
             {
-                resultText.text = "ÇÌÇ≥Ç—";
+                resultText.text = "„Çè„Åï„Å≥";
                 resultText.color = Color.green;
+                Destroy(gameObject);
             }
         }
         else if (type == "b")
         {
 
-            resultText.text = "ÇµÇ·ÇØ";
+            resultText.text = "„Åó„ÇÉ„Åë";
             resultText.color = Color.red;
+            Destroy(gameObject);
         }
         else if (type == "c")
         {
 
-            resultText.text = "Ç®Ç©Ç©";
+            resultText.text = "„Åä„Åã„Åã";
             resultText.color = Color.yellow;
+            Destroy(gameObject);
         }
         else if (type == "d") {
 
-            resultText.text = "ÉcÉiÉ}Éà";
-            resultText.color= Color.white;
+            resultText.text = "„ÉÑ„Éä„Éû„É®";
+            resultText.color= Color.blue;
+            Destroy(gameObject);
         }
 
     }

@@ -1,25 +1,27 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Circle_controll : MonoBehaviour
 {
 
-    //�O��ƂȂ�z��
-    string[] circle = { "a", "a", "a", "b", "c", "d" };
+    //前提となる配列
+    string[] circle = { "a", "a", "a", "b", "c", "d", "a", "c", "a" };
 
-    //�z��̗v�f�������_���ɉ�ʏ�̃I�u�W�F�Ɋ��蓖�Ă�
-    //�I�u�W�F�̖��O����L�̂��̂Ƀ����_���ɏ���������
-    //�������I�u�W�F�̖��O��a�Ȃ��ʂ�a�ƕ\������B
-
-    //���X�����ǁA�Q�[���I�u�W�F�����Ƀ����_���Ȃ�z��ʂ�ł��ǂ��Ȃ����c�H�H
+    //配列の要素をランダムに画面上のオブジェに割り当てる
+    //もしもオブジェの名前がaなら画面にaと表示する。
+   
+    //GameobjectクラスにMaruタグのついたオブジェが代入される
+    //オブジェの名前が順繰りにcircle配列に入った名前に変化
+    //その名前を判別して、画面に文字を出力
 
 
     void Start()
     {
+        //ランダムじゃないかも
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Maru");
 
         if (gameObjects.Length != circle.Length)
         {
-            Debug.LogWarning("�I�u�W�F�N�g����circle�z��̐�����v���Ă��܂���");
+            Debug.LogWarning("オブジェクト数とcircle配列の数が一致していません");
             return;
         }
 
@@ -37,20 +39,21 @@ public class Circle_controll : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("CircleType ���A�^�b�`����Ă��Ȃ��I�u�W�F�N�g������܂�");
+                Debug.LogWarning("CircleType がアタッチされていないオブジェクトがあります");
             }
         }
 
     }
 
-    // �z����V���b�t������֐�
+    // 配列をシャッフルする関数
     void ShuffleArray(string[] array)
     {
+        //unityのRandomはインスタンス化せずに使う（そもそもunityでインスタンス化はほとんどやらない）
         System.Random rng = new System.Random();
         for (int i = array.Length - 1; i > 0; i--)
         {
             int j = rng.Next(i + 1);
-            // �v�f�����ւ�
+            // 要素を入れ替え
             string temp = array[i];
             array[i] = array[j];
             array[j] = temp;
@@ -61,11 +64,11 @@ public class Circle_controll : MonoBehaviour
 
     void Update()
     {
-        //���͈͓̂̔��ɓ�������ԂŃX�y�[�X�L�[�������ƁA��ʂɂ��̕������\�������
-        //���̂��ƂɃA�^�b�`���������ǂ����������B
+        //ものの範囲内に入った状態でスペースキーを押すと、画面にその文字が表示される
+        //ものごとにアタッチした方が良さそうかも。
 
 
 
-        
+
     }
 }
