@@ -1,35 +1,13 @@
 ﻿using UnityEngine;
-
 using UnityEngine.UI;
-
 
 public class ClickObject : MonoBehaviour
 {
-    public Text resultText;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (resultText != null)
-        {
-            resultText.text = "";
-        }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
+    public Text resultText;  // ※ GameManagerのresultTextと同じものを使うなら削除してもOK
 
     void OnMouseDown()
     {
         CircleType ct = GetComponent<CircleType>();
-
         if (ct != null)
         {
             string type = ct.type;
@@ -43,37 +21,39 @@ public class ClickObject : MonoBehaviour
 
     void JudgeClick(string type)
     {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManagerが見つかりません");
+            return;
+        }
+
         if (type == "a")
         {
-            Debug.Log("OK");
-
-            if (resultText != null)
-            {
-                resultText.text = "わさび";
-                resultText.color = Color.green;
-                Destroy(gameObject);
-            }
+            GameManager.Instance.resultText.text = "わさび";
+            GameManager.Instance.resultText.color = Color.green;
+            GameManager.Instance.ChangeLife(-1); // ライフを1減らす
         }
         else if (type == "b")
         {
-
-            resultText.text = "しゃけ";
-            resultText.color = Color.red;
-            Destroy(gameObject);
+            GameManager.Instance.resultText.text = "しゃけ";
+            GameManager.Instance.resultText.color = Color.red;
         }
         else if (type == "c")
         {
-
-            resultText.text = "おかか";
-            resultText.color = Color.yellow;
-            Destroy(gameObject);
+            GameManager.Instance.resultText.text = "おかか";
+            GameManager.Instance.resultText.color = Color.yellow;
         }
-        else if (type == "d") {
-
-            resultText.text = "ツナマヨ";
-            resultText.color= Color.blue;
-            Destroy(gameObject);
+        else if (type == "d")
+        {
+            GameManager.Instance.resultText.text = "ツナマヨ";
+            GameManager.Instance.resultText.color = Color.blue;
+        }
+        else
+        {
+            GameManager.Instance.resultText.text = "不明なタイプ";
+            GameManager.Instance.resultText.color = Color.white;
         }
 
+        Destroy(gameObject);
     }
 }
