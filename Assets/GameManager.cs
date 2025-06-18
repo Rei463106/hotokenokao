@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 
@@ -17,6 +18,13 @@ public class GameManager : MonoBehaviour
 
     public Sprite[] wasabiSprites;
     private int wasabiIndex = 0;
+
+
+    // 取得数カウント用
+    private int countB = 0;
+    private int countC = 0;
+    private int countD = 0;
+
 
 
 
@@ -64,6 +72,7 @@ public class GameManager : MonoBehaviour
             {
                 resultText.text = "ゲームオーバー";
                 resultText.color = Color.black;
+                SceneManager.LoadScene("GameOverScreen");
             }
         }
     }
@@ -75,7 +84,7 @@ public class GameManager : MonoBehaviour
             Life_result.text = "ライフ: " + life;
         }
     }
-
+    //b1c2d1取ったら自動的にシーンを移動する。
 
 
 
@@ -85,4 +94,29 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void AddCount(string type)
+    {
+        if (type == "b")
+        {
+            countB++;
+        }
+        else if (type == "c")
+        {
+            countC++;
+        }
+        else if (type == "d")
+        {
+            countD++;
+        }
+
+        Debug.Log($"取得数 b:{countB}, c:{countC}, d:{countD}");
+
+        if (countB >= 1 && countC >= 2 && countD >= 1)
+        {
+            Debug.Log("条件達成！シーン移動します");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("NextScene");
+        }
+    }
+
 }

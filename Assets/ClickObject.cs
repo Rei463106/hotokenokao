@@ -38,16 +38,19 @@ public class ClickObject : MonoBehaviour
         {
             GameManager.Instance.resultText.text = "しゃけ";
             GameManager.Instance.resultText.color = Color.red;
+            GameManager.Instance.AddCount("b");
         }
         else if (type == "c")
         {
             GameManager.Instance.resultText.text = "おかか";
             GameManager.Instance.resultText.color = Color.yellow;
+            GameManager.Instance.AddCount("c");
         }
         else if (type == "d")
         {
             GameManager.Instance.resultText.text = "ツナマヨ";
             GameManager.Instance.resultText.color = Color.blue;
+            GameManager.Instance.AddCount("d");
         }
         else
         {
