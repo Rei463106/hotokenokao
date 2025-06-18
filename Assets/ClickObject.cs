@@ -32,6 +32,7 @@ public class ClickObject : MonoBehaviour
             GameManager.Instance.resultText.text = "わさび";
             GameManager.Instance.resultText.color = Color.green;
             GameManager.Instance.ChangeLife(-1); // ライフを1減らす
+            GameManager.Instance.SwitchWasabiImage(); ; // ← 画像切り替え
         }
         else if (type == "b")
         {

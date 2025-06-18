@@ -13,6 +13,14 @@ public class GameManager : MonoBehaviour
     public int life = 3;
     public Text Life_result;
     public Text resultText;
+    public Image targetImage;         // ← UI画像（Image）を指定
+
+    public Sprite[] wasabiSprites;
+    private int wasabiIndex = 0;
+
+
+
+    //public Sprite wasabiReactionSprite; // ← 切り替えたいSpriteをInspectorでセット
 
     void Awake()
     {
@@ -27,8 +35,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SwitchWasabiImage()
+    {
+        if (wasabiSprites.Length == 0 || targetImage == null) return;
 
-
+        wasabiIndex = (wasabiIndex + 1) % wasabiSprites.Length;
+        targetImage.sprite = wasabiSprites[wasabiIndex];
+    }
 
 
 
