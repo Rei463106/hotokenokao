@@ -6,6 +6,7 @@ public class CircleType : MonoBehaviour
 {
     public string type;
 
+
     public void SetType(string t)
     {
         type = t;

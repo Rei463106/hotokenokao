@@ -1,27 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneChanger : MonoBehaviour
 {
+    public static SceneChanger Instance;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // ÉVÅ[ÉìÇÇ‹ÇΩÇ¢Ç≈ï€éù
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeScene(string sceneName)
     {
-       
+        SceneManager.LoadScene(sceneName);
     }
-    public void ChangeScene()
+
+    public void Title()
     {
         SceneManager.LoadScene("playscreen");
     }
-
-
-
+   
 }
