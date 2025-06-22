@@ -28,5 +28,12 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene("playscreen");
     }
-   
+
+    public void Ending()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+
+
+
 }
