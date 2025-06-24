@@ -223,13 +223,13 @@ MonoBehaviour:
   - a
   - a
   - a
-  - a
-  - a
-  - a
-  - c
-  - d
+  - b
   - b
   - c
+  - c
+  - d
+  - d
+  - a
   omusubi_object:
   - {fileID: 457490682}
   - {fileID: 1643513654}
@@ -516,7 +516,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u4ECF\uFF12\uFF1A\u308F\u3055\u3073\u5165\u308A\u304C\uFF15\u3064\u3082\u2026\uFF1F\n\u3000\u3000\u3000\u2026\u6B63\u89E3\u306E\uFF15\u3064\u3001\u9078\u3079\u307E\u3059\u304B\uFF1F"
+  m_Text: "\u4ECF\uFF12\uFF1A\u308F\u3055\u3073\u5165\u308A\u304C4\u3064\u3082\u2026\uFF1F\n\u3000\u3000\u3000\u2026\u6B63\u89E3\u3092\u5168\u3066\u3001\u9078\u3079\u307E\u3059\u304B\uFF1F"
 --- !u!222 &480564595
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1204,15 +1204,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 63043e5b1c08c9f46937fe37fc64dec9, type: 3}
   - {fileID: 21300000, guid: eba83d2248e05e145affadebef6b004f, type: 3}
   - {fileID: 21300000, guid: 7901c09e93d8ca24780342b7d766343b, type: 3}
-  - {fileID: 21300000, guid: 05b4d069b99c51242ac609f1613a28dd, type: 3}
+  - {fileID: 21300000, guid: 21dc796fb7fa9af4c92532f63da2e71f, type: 3}
   wasabiSprites2:
   - {fileID: 21300000, guid: 7ecc91fa83038624f9de843ebb7ebe74, type: 3}
   - {fileID: 21300000, guid: bedd9160003217d49bda262e64692d88, type: 3}
   - {fileID: 21300000, guid: 42025289a14368b4495f58f196822915, type: 3}
-  - {fileID: 21300000, guid: 05b4d069b99c51242ac609f1613a28dd, type: 3}
+  - {fileID: 21300000, guid: 21dc796fb7fa9af4c92532f63da2e71f, type: 3}
   GetSound: {fileID: 1236888491}
   DamegeSound: {fileID: 1180817214}
   ExplosionSound: {fileID: 584510561}
+  explosionOverlayImage: {fileID: 0}
 --- !u!4 &1126712520
 Transform:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ public class Circle_controll : MonoBehaviour
 {
 
     //前提となる配列
-    string[] circle = { "a", "a", "a", "b", "c", "d", "a", "c", "a" };
+    string[] circle = { "a", "a", "a", "b", "b", "d", "c", "c", "d" };
 
     //配列の要素をランダムに画面上のオブジェに割り当てる
     //もしもオブジェの名前がaなら画面にaと表示する。

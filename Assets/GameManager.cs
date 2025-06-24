@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     private bool alreadyCleared = false;
 
+    public Image explosionOverlayImage; // 全画面に表示する用
+
     void Awake()
     {
         if (Instance == null)
@@ -49,6 +51,28 @@ public class GameManager : MonoBehaviour
 
         if (resultText != null)
             resultText.text = "";
+
+        if (explosionOverlayImage != null && wasabiSprites1.Length > 3)
+        {
+            // RectTransformを画面いっぱいに
+            RectTransform rt = explosionOverlayImage.GetComponent<RectTransform>();
+            if (rt != null)
+            {
+                rt.anchorMin = Vector2.zero;
+                rt.anchorMax = Vector2.one;
+                rt.offsetMin = Vector2.zero;
+                rt.offsetMax = Vector2.zero;
+            }
+
+            explosionOverlayImage.sprite = wasabiSprites1[3];
+            explosionOverlayImage.preserveAspect = true; // 必要に応じて
+            explosionOverlayImage.enabled = true;
+        }
+
+
+
+
+
     }
 
     void OnEnable()
@@ -132,6 +156,15 @@ public class GameManager : MonoBehaviour
         {
             PlayingSound("explosion");
 
+            //  ここで爆発画像を全画面に表示
+            if (explosionOverlayImage != null && wasabiSprites1.Length > 3)
+            {
+                explosionOverlayImage.sprite = wasabiSprites1[3];
+                explosionOverlayImage.enabled = true;
+            }
+
+
+
             if (resultText != null)
             {
                 resultText.text = "ゲームオーバー";
@@ -172,7 +205,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"取得数 b:{countB}, c:{countC}, d:{countD}");
 
-        if (!alreadyCleared && countB >= 1 && countC >= 2 && countD >= 1)
+        if (!alreadyCleared && countB >= 2 && countC >= 2 && countD >= 2)
         {
             alreadyCleared = true;
             Debug.Log("条件達成！シーン移動します");
