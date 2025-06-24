@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ClearScene.unity
     guid: 7cb52eb8fa7c00f42b56db46c567535d
+  - enabled: 1
+    path: Assets/Chartscreen.unity
+    guid: 9b7f035ce9080eb43a48901ffd0d2df2
   m_configObjects: {}

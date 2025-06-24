@@ -7,11 +7,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public int life = 3;
+    public int life = 5;
     public Text Life_result;
     public Text resultText;
     public Image targetImage;
-    public Sprite[] wasabiSprites;
+
+    public Sprite[] wasabiSprites1; // ラウンド1用
+    public Sprite[] wasabiSprites2; // ラウンド2用
+    private Sprite[] currentWasabiSprites; // 今使っている画像セット
+
     private int wasabiIndex = 0;
 
     public AudioSource GetSound;
@@ -22,7 +26,7 @@ public class GameManager : MonoBehaviour
     private int countC = 0;
     private int countD = 0;
 
-    private bool alreadyCleared = false; // ← シーン再読み込み防止用
+    private bool alreadyCleared = false;
 
     void Awake()
     {
@@ -61,11 +65,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"[GameManager] シーン読み込み完了: {scene.name}");
 
+        // UI関連の再取得
         GameObject rt = GameObject.Find("resultText");
-        if (rt != null)
-        {
-            resultText = rt.GetComponent<Text>();
-        }
+        if (rt != null) resultText = rt.GetComponent<Text>();
 
         GameObject lt = GameObject.Find("Life_result");
         if (lt != null)
@@ -74,21 +76,51 @@ public class GameManager : MonoBehaviour
             UpdateLifeUI();
         }
 
-        ResetCounts();
-        alreadyCleared = false;
-
-        // ... 既存のUI取得のあとに追加
+        // Audio再取得
         GameObject get = GameObject.Find("GetSound");
-        if (get != null)
-            GetSound = get.GetComponent<AudioSource>();
+        if (get != null) GetSound = get.GetComponent<AudioSource>();
 
         GameObject dmg = GameObject.Find("DamegeSound");
-        if (dmg != null)
-            DamegeSound = dmg.GetComponent<AudioSource>();
+        if (dmg != null) DamegeSound = dmg.GetComponent<AudioSource>();
 
         GameObject exp = GameObject.Find("ExplosionSound");
-        if (exp != null)
-            ExplosionSound = exp.GetComponent<AudioSource>();
+        if (exp != null) ExplosionSound = exp.GetComponent<AudioSource>();
+
+        // シーンごとの画像とスプライトセット切り替え
+        if (scene.name == "playscreen")
+        {
+            GameObject img = GameObject.Find("TargetImage");
+            if (img != null) targetImage = img.GetComponent<Image>();
+
+            currentWasabiSprites = wasabiSprites1;
+            wasabiIndex = 0;
+            if (targetImage != null && currentWasabiSprites.Length > 0)
+                targetImage.sprite = currentWasabiSprites[0];
+        }
+        else if (scene.name == "NextScene")
+        {
+            GameObject img = GameObject.Find("hotoke");
+            if (img != null) targetImage = img.GetComponent<Image>();
+
+            currentWasabiSprites = wasabiSprites2;
+            wasabiIndex = 0;
+            life = 3; // ライフも初期化
+            UpdateLifeUI();
+
+            if (targetImage != null && currentWasabiSprites.Length > 0)
+                targetImage.sprite = currentWasabiSprites[0];
+        }
+
+        ResetCounts();
+        alreadyCleared = false;
+    }
+
+    public void SwitchWasabiImage()
+    {
+        if (currentWasabiSprites == null || currentWasabiSprites.Length == 0 || targetImage == null) return;
+
+        wasabiIndex = (wasabiIndex + 1) % currentWasabiSprites.Length;
+        targetImage.sprite = currentWasabiSprites[wasabiIndex];
     }
 
     public void ChangeLife(int delta)
@@ -128,7 +160,7 @@ public class GameManager : MonoBehaviour
     {
         if (Life_result != null)
         {
-            Life_result.text = "ライフ: " + life;
+            Life_result.text = "仏の顔: " + life;
         }
     }
 
@@ -140,7 +172,6 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"取得数 b:{countB}, c:{countC}, d:{countD}");
 
-        // 条件達成チェック（再実行防止付き）
         if (!alreadyCleared && countB >= 1 && countC >= 2 && countD >= 1)
         {
             alreadyCleared = true;
@@ -157,31 +188,24 @@ public class GameManager : MonoBehaviour
 
         if (currentScene == "playscreen")
         {
-            SceneManager.LoadScene("NextScene"); // Round2 へ
+            SceneManager.LoadScene("NextScene");
         }
         else if (currentScene == "NextScene")
         {
-            SceneManager.LoadScene("ClearScene"); // クリア画面へ
+            SceneManager.LoadScene("ClearScene");
         }
         else
         {
             Debug.LogWarning("想定外のシーン名: " + currentScene);
         }
     }
+
     public void ResetCounts()
     {
         countB = 0;
         countC = 0;
         countD = 0;
         Debug.Log("カウントをリセットしました");
-    }
-
-    public void SwitchWasabiImage()
-    {
-        if (wasabiSprites.Length == 0 || targetImage == null) return;
-
-        wasabiIndex = (wasabiIndex + 1) % wasabiSprites.Length;
-        targetImage.sprite = wasabiSprites[wasabiIndex];
     }
 
     public void PlayingSound(string t)
