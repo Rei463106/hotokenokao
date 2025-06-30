@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Text Life_result;
     public Text resultText;
     public Image targetImage;
+    public Text Clear;
 
     public Sprite[] wasabiSprites1; // ラウンド1用
     public Sprite[] wasabiSprites2; // ラウンド2用
@@ -92,6 +93,10 @@ public class GameManager : MonoBehaviour
         // UI関連の再取得
         GameObject rt = GameObject.Find("resultText");
         if (rt != null) resultText = rt.GetComponent<Text>();
+
+        GameObject cl = GameObject.Find("Clear");
+        if (cl != null) Clear=cl.GetComponent<Text>();
+        
 
         GameObject lt = GameObject.Find("Life_result");
         if (lt != null)
@@ -205,8 +210,9 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"取得数 b:{countB}, c:{countC}, d:{countD}");
 
-        if (!alreadyCleared && countB >= 2 && countC >= 2 && countD >= 2)
+        if (!alreadyCleared && countB >= 1 && countC >= 1 && countD >= 1)
         {
+            Clear.text = "Clear!!!";
             alreadyCleared = true;
             Debug.Log("条件達成！シーン移動します");
             StartCoroutine(DelayToNextScene());
